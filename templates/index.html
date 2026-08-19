@@ -1,0 +1,249 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>AI HealthAssist — Health Education Assistant</title>
+  <link rel="stylesheet" href="/static/css/style.css" />
+</head>
+<body>
+
+  <!-- ===== HEADER ===== -->
+  <header class="site-header">
+    <div class="header-inner">
+      <div class="header-brand">
+        <span class="brand-icon">&#10084;&#65039;</span>
+        <span class="brand-name">AI HealthAssist</span>
+      </div>
+      <div class="header-right">
+        <span class="provider-badge" id="provider-badge">&#129302; Loading AI...</span>
+        <div class="header-badge">Educational Use Only</div>
+      </div>
+    </div>
+  </header>
+
+  <!-- ===== DISCLAIMER BANNER ===== -->
+  <div class="disclaimer-banner" role="alert">
+    <strong>&#9888; Medical Disclaimer:</strong> This application provides general health education information only.
+    It does <strong>not</strong> diagnose conditions, prescribe medication, or replace professional medical advice.
+    In an emergency, call your local emergency services immediately.
+  </div>
+
+  <main>
+
+    <!-- ===== HERO SECTION ===== -->
+    <section class="hero" id="hero">
+      <div class="hero-content">
+        <h1 class="hero-title">Your AI Health Education Assistant</h1>
+        <p class="hero-subtitle">General first-aid guidance and medicine information — powered by AI.</p>
+      </div>
+      <div class="module-cards">
+
+        <!-- First-Aid Card -->
+        <div class="module-card" id="card-first-aid" role="button" tabindex="0" aria-expanded="false" aria-controls="first-aid-section">
+          <div class="card-icon">&#128681;</div>
+          <h2 class="card-title">AI First-Aid Guide</h2>
+          <p class="card-description">Describe a minor injury or first-aid situation and get structured educational guidance on immediate steps, what to avoid, and when to seek help.</p>
+          <button class="card-btn" id="btn-open-firstaid">Get Guidance</button>
+        </div>
+
+        <!-- Medicine Info Card -->
+        <div class="module-card" id="card-medicine" role="button" tabindex="0" aria-expanded="false" aria-controls="medicine-section">
+          <div class="card-icon">&#128138;</div>
+          <h2 class="card-title">Medicine Information</h2>
+          <p class="card-description">Enter a medicine name to receive general educational information including uses, precautions, warnings, and when to consult a healthcare professional.</p>
+          <button class="card-btn" id="btn-open-medicine">Learn More</button>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== FIRST-AID MODULE ===== -->
+    <section class="module-section hidden" id="first-aid-section" aria-labelledby="firstaid-heading">
+      <div class="module-section-inner">
+        <div class="module-header">
+          <span class="module-header-icon">&#128681;</span>
+          <h2 id="firstaid-heading">AI First-Aid Guide</h2>
+        </div>
+        <p class="module-description">Describe the first-aid situation below (e.g. "I burned my hand on a hot pan"). The AI will provide general educational guidance.</p>
+
+        <form class="input-form" id="first-aid-form" novalidate>
+          <label class="input-label" for="firstaid-input">Describe the situation</label>
+          <textarea
+            class="input-textarea"
+            id="firstaid-input"
+            name="situation"
+            rows="4"
+            maxlength="1000"
+            placeholder="e.g. My child scraped their knee on concrete and it is bleeding a little..."
+            required
+          ></textarea>
+          <div class="char-count"><span id="firstaid-char-count">0</span> / 1000</div>
+          <div class="inline-error hidden" id="firstaid-inline-error" role="alert"></div>
+          <button type="submit" class="submit-btn" id="firstaid-submit-btn">
+            <span class="btn-label">Get First-Aid Guidance</span>
+            <span class="btn-spinner hidden" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <!-- Loading state -->
+        <div class="loading-state hidden" id="firstaid-loading" aria-live="polite">
+          <div class="spinner"></div>
+          <p>AI is analyzing your request&hellip;</p>
+        </div>
+
+        <!-- Error state -->
+        <div class="error-state hidden" id="firstaid-error" role="alert"></div>
+
+        <!-- Response -->
+        <div class="response-container hidden" id="firstaid-response">
+          <h3 class="response-heading">First-Aid Guidance</h3>
+          <div class="response-grid">
+
+            <div class="section-card section-blue" id="card-immediate_steps">
+              <div class="section-card-header">
+                <span class="section-icon">&#9889;</span>
+                <h4 class="section-title">Immediate Steps</h4>
+              </div>
+              <p class="section-content" id="immediate_steps"></p>
+            </div>
+
+            <div class="section-card section-red" id="card-things_to_avoid">
+              <div class="section-card-header">
+                <span class="section-icon">&#128683;</span>
+                <h4 class="section-title">Things to Avoid</h4>
+              </div>
+              <p class="section-content" id="things_to_avoid"></p>
+            </div>
+
+            <div class="section-card section-amber" id="card-warning_signs">
+              <div class="section-card-header">
+                <span class="section-icon">&#9888;&#65039;</span>
+                <h4 class="section-title">Warning Signs</h4>
+              </div>
+              <p class="section-content" id="warning_signs"></p>
+            </div>
+
+            <div class="section-card section-green" id="card-when_to_seek_help">
+              <div class="section-card-header">
+                <span class="section-icon">&#127973;&#65039;</span>
+                <h4 class="section-title">When to Seek Professional Help</h4>
+              </div>
+              <p class="section-content" id="when_to_seek_help"></p>
+            </div>
+
+          </div>
+          <p class="response-disclaimer">This information is for general educational purposes only. Always consult a qualified healthcare professional for medical advice.</p>
+        </div>
+
+      </div>
+    </section>
+
+    <!-- ===== MEDICINE MODULE ===== -->
+    <section class="module-section hidden" id="medicine-section" aria-labelledby="medicine-heading">
+      <div class="module-section-inner">
+        <div class="module-header">
+          <span class="module-header-icon">&#128138;</span>
+          <h2 id="medicine-heading">Medicine Information Assistant</h2>
+        </div>
+        <p class="module-description">Enter a medicine name below to receive general educational information about it.</p>
+
+        <form class="input-form" id="medicine-form" novalidate>
+          <label class="input-label" for="medicine-input">Medicine name</label>
+          <input
+            class="input-text"
+            type="text"
+            id="medicine-input"
+            name="medicine"
+            maxlength="200"
+            placeholder="e.g. Ibuprofen, Paracetamol, Amoxicillin..."
+            required
+            autocomplete="off"
+          />
+          <div class="inline-error hidden" id="medicine-inline-error" role="alert"></div>
+          <button type="submit" class="submit-btn" id="medicine-submit-btn">
+            <span class="btn-label">Get Medicine Information</span>
+            <span class="btn-spinner hidden" aria-hidden="true"></span>
+          </button>
+        </form>
+
+        <!-- Loading state -->
+        <div class="loading-state hidden" id="medicine-loading" aria-live="polite">
+          <div class="spinner"></div>
+          <p>AI is analyzing your request&hellip;</p>
+        </div>
+
+        <!-- Error state -->
+        <div class="error-state hidden" id="medicine-error" role="alert"></div>
+
+        <!-- Response -->
+        <div class="response-container hidden" id="medicine-response">
+          <h3 class="response-heading">Medicine Information</h3>
+          <div class="response-grid">
+
+            <div class="section-card section-blue" id="card-what_it_is">
+              <div class="section-card-header">
+                <span class="section-icon">&#128209;</span>
+                <h4 class="section-title">What It Is</h4>
+              </div>
+              <p class="section-content" id="what_it_is"></p>
+            </div>
+
+            <div class="section-card section-teal" id="card-common_uses">
+              <div class="section-card-header">
+                <span class="section-icon">&#10004;&#65039;</span>
+                <h4 class="section-title">Common Uses</h4>
+              </div>
+              <p class="section-content" id="common_uses"></p>
+            </div>
+
+            <div class="section-card section-amber" id="card-general_precautions">
+              <div class="section-card-header">
+                <span class="section-icon">&#128276;</span>
+                <h4 class="section-title">General Precautions</h4>
+              </div>
+              <p class="section-content" id="general_precautions"></p>
+            </div>
+
+            <div class="section-card section-red" id="card-important_warnings">
+              <div class="section-card-header">
+                <span class="section-icon">&#128721;</span>
+                <h4 class="section-title">Important Warnings</h4>
+              </div>
+              <p class="section-content" id="important_warnings"></p>
+            </div>
+
+            <div class="section-card section-green" id="card-when_to_consult">
+              <div class="section-card-header">
+                <span class="section-icon">&#128104;&#8205;&#9877;&#65039;</span>
+                <h4 class="section-title">When to Consult a Professional</h4>
+              </div>
+              <p class="section-content" id="when_to_consult"></p>
+            </div>
+
+          </div>
+          <p class="response-disclaimer">This information is for general educational purposes only. Do not start, stop, or change any medication without consulting a qualified healthcare professional.</p>
+        </div>
+
+      </div>
+    </section>
+
+  </main>
+
+  <!-- ===== FOOTER ===== -->
+  <footer class="site-footer">
+    <div class="footer-inner">
+      <p class="footer-disclaimer">
+        <strong>&#9888; Medical Disclaimer:</strong> AI HealthAssist provides general health education information only.
+        It does not diagnose medical conditions, prescribe medication, or provide personalised medical advice.
+        The information presented is not a substitute for professional medical consultation.
+        Always consult a qualified and licensed healthcare professional for any medical concerns.
+        In case of a medical emergency, contact your local emergency services immediately (e.g. 911, 999, 112).
+      </p>
+      <p class="footer-copy">&copy; 2025 AI HealthAssist &mdash; Academic AI Internship Project</p>
+    </div>
+  </footer>
+
+  <script src="/static/js/main.js"></script>
+</body>
+</html>
