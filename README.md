@@ -1,4 +1,4 @@
-# AI HealthAssist
+# 🩺 AI HealthAssist
 
 An AI-powered healthcare education web application providing general first-aid guidance and medicine information — powered by **Google Gemini** (default) or **IBM watsonx.ai** (optional).
 
@@ -6,16 +6,49 @@ An AI-powered healthcare education web application providing general first-aid g
 
 ---
 
-## Features
+## ✨ Features
 
-- **AI First-Aid Guide** — Describe a minor injury or situation; the AI generates specific, structured educational guidance covering immediate steps, things to avoid, warning signs, and when to seek professional help.
-- **Medicine Information Assistant** — Enter a medicine name; the AI generates general educational information covering what it is, common uses, precautions, warnings, and when to consult a professional.
-- **Provider badge** — The active AI provider is displayed in the header.
-- **Provider architecture** — Switch between Google Gemini and IBM watsonx.ai via a single environment variable.
+### 🤕 AI First-Aid Guide
+
+Describe a first-aid situation in natural language and the AI generates situation-specific educational guidance covering:
+
+- Immediate steps
+- Things to avoid
+- Warning signs
+- When to seek professional help
+
+### 💊 Medicine Information Assistant
+
+Enter a medicine name to receive general educational information covering:
+
+- What it is
+- Common uses
+- General precautions
+- Important warnings
+- When to consult a healthcare professional
+
+### 🤖 Multiple AI Providers
+
+The application uses a provider-based architecture supporting:
+
+- **Google Gemini** — Default and recommended provider
+- **IBM watsonx.ai** — Optional provider
+
+The active provider can be changed through a single environment variable.
+
+### 🔐 Secure Configuration
+
+- API keys are stored in environment variables.
+- `.env` is excluded from Git.
+- API credentials are never exposed to frontend JavaScript.
+
+### 📱 Responsive Interface
+
+The application uses a lightweight frontend built with HTML, CSS and vanilla JavaScript.
 
 ---
 
-## Technology Stack
+## 🛠️ Technology Stack
 
 | Layer | Technology |
 |---|---|
@@ -27,7 +60,33 @@ An AI-powered healthcare education web application providing general first-aid g
 
 ---
 
-## AI Architecture
+# 📸 Screenshots
+
+## 🖥️ Application Interface
+
+The main AI HealthAssist interface provides access to both AI-powered healthcare features from a single responsive web application.
+
+![AI HealthAssist Application](screenshots/application-ui.png)
+
+---
+
+## 🤕 AI First-Aid Guide
+
+The First-Aid Guide accepts a user's situation and generates structured, AI-powered educational guidance including immediate steps, things to avoid, warning signs, and when to seek professional help.
+
+![AI First-Aid Guide](screenshots/first-aid-guide.png)
+
+---
+
+## 💊 Medicine Information Assistant
+
+The Medicine Information Assistant uses AI to generate general educational information about a medicine, including its uses, precautions, warnings, and when to consult a healthcare professional.
+
+![Medicine Information Assistant](screenshots/medicine-information.png)
+
+---
+
+## 🏗️ AI Architecture
 
 ```
 User Request
@@ -141,30 +200,34 @@ WATSONX_MODEL_ID=meta-llama/llama-3-8b-instruct
 
 ---
 
-## Project Structure
-
-```
+##📁 Project Structure
 AI-HealthAssist/
-├── app.py                      # Flask app, REST routes, error handlers
-├── requirements.txt            # Python dependencies
-├── .env.example                # Environment variable template
-├── .gitignore                  # Excludes .env and generated files
+│
+├── app.py
+├── requirements.txt
+├── .env.example
+├── .gitignore
 ├── README.md
+├── ai-healthassist-plan.md
+│
 ├── services/
 │   ├── __init__.py
-│   ├── ai_provider.py          # Provider router — reads AI_PROVIDER
-│   ├── gemini_service.py       # Google Gemini integration (default)
-│   └── watsonx_service.py      # IBM watsonx.ai integration (optional)
+│   ├── ai_provider.py
+│   ├── gemini_service.py
+│   └── watsonx_service.py
+│
 ├── static/
-│   ├── css/style.css           # Application styles (responsive)
-│   └── js/main.js              # Frontend: provider badge, fetch, rendering
+│   ├── css/
+│   │   └── style.css
+│   └── js/
+│       └── main.js
+│
 └── templates/
-    └── index.html              # Single-page HTML template
-```
+    └── index.html
 
 ---
 
-## API Endpoints
+## 🔌 API Endpoints
 
 ### `GET /api/provider`
 
@@ -216,7 +279,7 @@ Returns the currently active AI provider name.
 
 ---
 
-## Gemini Integration Details
+## 🤖 Gemini Integration Details
 
 - **SDK:** `google-genai` v2.18.1 (current official Google Gemini Python SDK)
 - **Default model:** `gemini-3.6-flash`
@@ -226,7 +289,7 @@ Returns the currently active AI provider name.
 
 ---
 
-## IBM watsonx.ai Integration Details
+## 🏢 IBM watsonx.ai Integration Details
 
 - **SDK:** `ibm-watsonx-ai` v1.6.3
 - **Default model:** `meta-llama/llama-3-8b-instruct` (configurable)
@@ -235,7 +298,7 @@ Returns the currently active AI provider name.
 
 ---
 
-## Safety & Disclaimers
+## 🛡️ Safety & Disclaimers
 
 - Responses are for **general educational purposes only**
 - The AI does **not** diagnose medical conditions
@@ -246,6 +309,6 @@ Returns the currently active AI provider name.
 
 ---
 
-## License
+## 📄 License
 
 This project is built as an academic AI internship demonstration. See your institution's guidelines for usage terms.
